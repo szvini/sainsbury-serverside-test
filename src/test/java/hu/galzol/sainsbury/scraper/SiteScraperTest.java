@@ -25,6 +25,12 @@ public class SiteScraperTest {
     }
 
     @Test
+    public void testCollectProductLinksSkipCrossSellItems() {
+        List<String> links = siteScraper.searchProductLinks("/sainsbury/product-list.html");
+        assertThat(links).doesNotContain("sainsburys-140ml-klip-lock-storage-set---3pk.html");
+    }
+
+    @Test
     public void testProductInfoLookup() {
         Optional<Product> result = siteScraper.getProductDetails("/sainsbury/sainsburys-british-strawberries-400g.html");
         assertThat(result).isPresent();
