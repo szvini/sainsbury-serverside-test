@@ -46,19 +46,19 @@ public class ProductSiteScraperTest {
     public void testAllProductLookup() {
         ProductSummary summary = siteScraper.getAllProducts(getResourceURL("/sainsbury/product-list.html"));
 
-        assertThat(summary.getProducts()).hasSize(2);
-        assertThat(summary.getGross()).isEqualByComparingTo(new BigDecimal("3.25"));
-        assertThat(summary.getVat()).isEqualByComparingTo(new BigDecimal("0.65"));
+        assertThat(summary.getResults()).hasSize(2);
+        assertThat(summary.getTotal().getGross()).isEqualByComparingTo(new BigDecimal("3.25"));
+        assertThat(summary.getTotal().getVat()).isEqualByComparingTo(new BigDecimal("0.65"));
 
-        assertThat(summary.getProducts().get(0).getTitle()).isEqualTo("Sainsbury's Strawberries 400g");
-        assertThat(summary.getProducts().get(0).getDescription()).isEqualTo("by Sainsbury's strawberries");
-        assertThat(summary.getProducts().get(0).getKcalPer100g()).isEqualTo(33);
-        assertThat(summary.getProducts().get(0).getUnitPrice()).isEqualByComparingTo(new BigDecimal("1.75"));
+        assertThat(summary.getResults().get(0).getTitle()).isEqualTo("Sainsbury's Strawberries 400g");
+        assertThat(summary.getResults().get(0).getDescription()).isEqualTo("by Sainsbury's strawberries");
+        assertThat(summary.getResults().get(0).getKcalPer100g()).isEqualTo(33);
+        assertThat(summary.getResults().get(0).getUnitPrice()).isEqualByComparingTo(new BigDecimal("1.75"));
 
-        assertThat(summary.getProducts().get(1).getTitle()).isEqualTo("Sainsbury's Blackberries, Sweet 150g");
-        assertThat(summary.getProducts().get(1).getDescription()).isEqualTo("by Sainsbury's blackberries");
-        assertThat(summary.getProducts().get(1).getKcalPer100g()).isEqualTo(32);
-        assertThat(summary.getProducts().get(1).getUnitPrice()).isEqualByComparingTo(new BigDecimal("1.5"));
+        assertThat(summary.getResults().get(1).getTitle()).isEqualTo("Sainsbury's Blackberries, Sweet 150g");
+        assertThat(summary.getResults().get(1).getDescription()).isEqualTo("by Sainsbury's blackberries");
+        assertThat(summary.getResults().get(1).getKcalPer100g()).isEqualTo(32);
+        assertThat(summary.getResults().get(1).getUnitPrice()).isEqualByComparingTo(new BigDecimal("1.5"));
     }
 
     public String getResourceURL(String source) {

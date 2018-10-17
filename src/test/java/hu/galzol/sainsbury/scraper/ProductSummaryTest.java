@@ -20,10 +20,10 @@ public class ProductSummaryTest {
 
         ProductSummary summary = ProductSummary.summarize(Arrays.asList(p1, p2));
 
-        assertThat(summary.getProducts()).hasSize(2);
-        assertThat(summary.getProducts()).containsOnly(p1, p2);
-        assertThat(summary.getGross()).isEqualByComparingTo(new BigDecimal("3"));
-        assertThat(summary.getVat()).isEqualByComparingTo(new BigDecimal("0.6"));
+        assertThat(summary.getResults()).hasSize(2);
+        assertThat(summary.getResults()).containsOnly(p1, p2);
+        assertThat(summary.getTotal().getGross()).isEqualByComparingTo(new BigDecimal("3"));
+        assertThat(summary.getTotal().getVat()).isEqualByComparingTo(new BigDecimal("0.6"));
     }
 
 
@@ -34,8 +34,8 @@ public class ProductSummaryTest {
 
         ProductSummary summary = ProductSummary.summarize(Collections.singletonList(p1));
 
-        assertThat(summary.getGross()).isEqualByComparingTo(new BigDecimal("0.34"));
-        assertThat(summary.getVat()).isEqualByComparingTo(new BigDecimal("0.07"));
+        assertThat(summary.getTotal().getGross()).isEqualByComparingTo(new BigDecimal("0.34"));
+        assertThat(summary.getTotal().getVat()).isEqualByComparingTo(new BigDecimal("0.07"));
     }
 
 }
