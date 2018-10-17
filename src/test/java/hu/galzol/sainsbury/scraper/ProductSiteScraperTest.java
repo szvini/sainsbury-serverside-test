@@ -38,7 +38,7 @@ public class ProductSiteScraperTest {
         Product p = result.get();
         assertThat(p.getTitle()).isEqualTo("Sainsbury's Strawberries 400g");
         assertThat(p.getDescription()).isEqualTo("by Sainsbury's strawberries");
-        assertThat(p.getKcalPer100g()).hasValue(33);
+        assertThat(p.getKcalPer100g()).isEqualTo(33);
         assertThat(p.getUnitPrice()).isEqualTo(new BigDecimal("1.75"));
     }
 
@@ -52,12 +52,12 @@ public class ProductSiteScraperTest {
 
         assertThat(summary.getProducts().get(0).getTitle()).isEqualTo("Sainsbury's Strawberries 400g");
         assertThat(summary.getProducts().get(0).getDescription()).isEqualTo("by Sainsbury's strawberries");
-        assertThat(summary.getProducts().get(0).getKcalPer100g()).hasValue(33);
+        assertThat(summary.getProducts().get(0).getKcalPer100g()).isEqualTo(33);
         assertThat(summary.getProducts().get(0).getUnitPrice()).isEqualByComparingTo(new BigDecimal("1.75"));
 
         assertThat(summary.getProducts().get(1).getTitle()).isEqualTo("Sainsbury's Blackberries, Sweet 150g");
         assertThat(summary.getProducts().get(1).getDescription()).isEqualTo("by Sainsbury's blackberries");
-        assertThat(summary.getProducts().get(1).getKcalPer100g()).hasValue(32);
+        assertThat(summary.getProducts().get(1).getKcalPer100g()).isEqualTo(32);
         assertThat(summary.getProducts().get(1).getUnitPrice()).isEqualByComparingTo(new BigDecimal("1.5"));
     }
 
