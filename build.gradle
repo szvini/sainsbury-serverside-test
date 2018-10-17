@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'sainsbury'
-version '1.0-SNAPSHOT'
+version '1.0'
 
 sourceCompatibility = 1.8
 
@@ -19,4 +19,12 @@ dependencies {
 
     testCompile 'junit:junit:4.12'
     testCompile 'org.assertj:assertj-core:3.11.1'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'hu.galzol.sainsbury.cli.ProductSiteScraper'
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
 }
