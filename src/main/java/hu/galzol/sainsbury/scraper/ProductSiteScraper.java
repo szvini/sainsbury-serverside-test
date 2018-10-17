@@ -26,8 +26,8 @@ public class ProductSiteScraper {
     public Optional<Document> openSite(String source) {
         try {
             return Optional.of(reader.getDocument(source));
-        } catch (IOException e) {
-            log.warning("Resource IO error: " + source + "\nMessage: " + e.getMessage());
+        } catch (Exception e) {
+            log.warning("Resource read error: " + source + "\nMessage: " + e.getMessage());
             return Optional.empty();
         }
     }

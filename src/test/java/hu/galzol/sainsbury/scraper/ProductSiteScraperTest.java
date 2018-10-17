@@ -22,7 +22,7 @@ public class ProductSiteScraperTest {
 
     @Test
     public void testCollectProductLinksInInvalidSite() {
-        assertThat(siteScraper.searchProductLinks(getResourceURL("nonexisting"))).hasSize(0);
+        assertThat(siteScraper.searchProductLinks("nonexisting")).hasSize(0);
     }
 
     @Test
