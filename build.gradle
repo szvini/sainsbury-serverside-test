@@ -13,6 +13,7 @@ repositories {
 
 dependencies {
     compile 'org.jsoup:jsoup:1.11.3'
+    compile 'org.json:json:20180813'
 
     testCompile 'junit:junit:4.12'
     testCompile 'org.assertj:assertj-core:3.11.1'
