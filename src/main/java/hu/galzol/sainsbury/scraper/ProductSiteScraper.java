@@ -9,12 +9,14 @@ import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-public class SiteScraper {
+public class ProductSiteScraper {
 
     private SiteReader reader;
 
-    public SiteScraper(SiteReader reader) {
+    public ProductSiteScraper(SiteReader reader) {
         this.reader = reader;
     }
 
@@ -61,5 +63,13 @@ public class SiteScraper {
 
                     return p;
                 });
+    }
+
+    public ProductSummary getAllProducts(String source) {
+        List<Product> products = searchProductLinks(source).parallelStream()
+                .map(this::getProductDetails)
+                .flatMap(o -> o.map(Stream::of).orElseGet(Stream::empty))
+                .collect(Collectors.toList());
+        return ProductSummary.summarize(products);
     }
 }
