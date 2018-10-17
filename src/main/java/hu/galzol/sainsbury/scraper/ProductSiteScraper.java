@@ -52,10 +52,24 @@ public class ProductSiteScraper {
                             .orElse("");
 
                     Optional<Integer> kcal = Optional.ofNullable(d.body().selectFirst(".mainProductInfo .productText .nutritionTable td:contains(kcal)"))
-                            .map(e -> Integer.valueOf(e.text().replaceFirst("kcal", "").trim()));
+                            .flatMap(e -> {
+                                try {
+                                    return Optional.of(Integer.valueOf(e.text().replaceFirst("kcal", "").trim()));
+                                } catch (NumberFormatException ex) {
+                                    log.warning("Invalid kcal: " + e.text());
+                                    return Optional.empty();
+                                }
+                            });
 
                     BigDecimal unitPrice = Optional.ofNullable(d.body().selectFirst(".productSummary .pricePerUnit"))
-                            .map(e -> new BigDecimal(e.text().replaceFirst("£([\\d.]+)\\/unit", "$1")))
+                            .flatMap(e -> {
+                                try {
+                                    return Optional.of(new BigDecimal(e.text().replaceFirst("£([\\d.]+)\\/unit", "$1")));
+                                } catch (NumberFormatException ex) {
+                                    log.warning("Invalid unit price: " + e.text());
+                                    return Optional.empty();
+                                }
+                            })
                             .orElse(BigDecimal.ZERO);
 
                     Product p = new Product();
