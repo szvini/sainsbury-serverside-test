@@ -9,10 +9,13 @@ import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ProductSiteScraper {
+
+    private static final Logger log = Logger.getLogger(ProductSiteScraper.class.getClass().getName());
 
     private SiteReader reader;
 
@@ -24,7 +27,7 @@ public class ProductSiteScraper {
         try {
             return Optional.of(reader.getDocument(source));
         } catch (IOException e) {
-            e.printStackTrace();
+            log.warning("Resource IO error: " + source + "\nMessage: " + e.getMessage());
             return Optional.empty();
         }
     }
